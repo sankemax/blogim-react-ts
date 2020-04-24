@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, } from "react";
 import axios from "axios";
 
 import { Item } from "../components/Item/ItemType";
@@ -9,25 +9,28 @@ export function useGetData(
   type: Item["type"] | Feed["type"],
   limit: number,
   offset: number,
-  config: Config
+  config: Config,
+  showErrorFn: (isError: boolean) => void
 ) {
-  const [data, setData] = useState({
-    elements: [],
-    isFetching: true,
-    error: null
-  });
+  const [data, setData] = useState<({ [key: string]: string, id: string })[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       try {
         const response = await axios.get(`${config.rssServiceBaseUrl}/${type.toLowerCase()}s?limit=${limit}&offset=${offset}`);
-        setData({ elements: response.data, isFetching: false, error: null });
+        setData(response.data.data[`${type.toLowerCase()}s`]);
       } catch (err) {
-        setData({ elements: [], isFetching: false, error: err.message });
+        console.log(err)
+        setError(err.message);
+        showErrorFn(true);
+      } finally {
+        setLoading(false);
       }
     }
     getData();
-  }, []);
+  }, [limit, offset, config, type, showErrorFn,]);
 
-  return data;
+  return { data, error, loading };
 }

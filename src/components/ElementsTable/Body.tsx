@@ -18,14 +18,16 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import * as R from "ramda";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { TableHead } from "@material-ui/core";
 
 import {
   TablePaginationActionsProps,
   CustomPaginationActionsTableProps,
 } from "./types";
 import { useGetData } from "../../hooks/getData";
-import { TableHead } from "@material-ui/core";
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
@@ -82,8 +84,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         {theme.direction === "rtl" ? (
           <KeyboardArrowRight />
         ) : (
-          <KeyboardArrowLeft />
-        )}
+            <KeyboardArrowLeft />
+          )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
@@ -93,8 +95,8 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
         {theme.direction === "rtl" ? (
           <KeyboardArrowLeft />
         ) : (
-          <KeyboardArrowRight />
-        )}
+            <KeyboardArrowRight />
+          )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
@@ -121,6 +123,10 @@ function calcPage(offset: number, rowsPerPage: number): number {
   return offset === 0 ? 0 : Math.floor((offset - 1) / rowsPerPage);
 }
 
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 export default function CustomPaginationActionsTable({
   dataType,
   config,
@@ -128,12 +134,31 @@ export default function CustomPaginationActionsTable({
   const classes = useStyles2();
   const [offset, setOffset] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(25);
+  const [isErrorShown, setIsErrorShown] = useState(false);
   const page = calcPage(offset, rowsPerPage);
-  const data = useGetData(dataType, rowsPerPage, offset, config);
+  const { data, error, loading, } = useGetData(dataType, rowsPerPage, offset, config, setIsErrorShown);
 
-  if (!data.elements.length) {
-    return (<p>LOADING...</p>);
+  function handleClose(event?: React.SyntheticEvent, reason?: string) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setIsErrorShown(false);
   }
+
+  if (error) {
+    return (<Snackbar open={isErrorShown} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity="error">
+        Something went wrong: {error}
+      </Alert>
+    </Snackbar>);
+  }
+
+  if (loading || !data.length) {
+    return (<CircularProgress />);
+  }
+
+  const headers = Object.keys(data[0]);
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -149,7 +174,7 @@ export default function CustomPaginationActionsTable({
     setOffset(0);
   };
 
-  return ( 
+  return (
     <TableContainer component={Paper}>
       <Table
         stickyHeader
@@ -157,16 +182,27 @@ export default function CustomPaginationActionsTable({
         aria-label="custom pagination table"
       >
         <TableHead>
-          {data.elements.map(({ id }: { id: string }) => (
+          <TableRow>
+            {headers.map(header => (<TableCell align="right">
+              {header}
+            </TableCell>))}
+          </TableRow>
+          {/* {data.map(({ id }: { id: string }) => (
             <TableRow>key={id}</TableRow>
-          ))}
+          ))} */}
         </TableHead>
         <TableBody>
-          {data.elements.map((row: any) =>
-            Object.values(R.dissoc("id", row)).map((value) => (
-              <TableCell>{value as string | number}</TableCell>
-            ))
-          )}
+          {data
+            .map(({ id, ...rest }: any) => ({ key: id, ...rest }))
+            .map((row: any) => (
+              <TableRow key={row.key}>
+                {Object.entries(row).map(([key, value]) =>
+                  key === 'key'
+                    ? (<TableCell hidden>{value as string | number}</TableCell>)
+                    : (<TableCell align="right">{value as string | number}</TableCell>)
+                )}
+              </TableRow>
+            ))}
           {/* {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
@@ -178,7 +214,7 @@ export default function CustomPaginationActionsTable({
             <TablePagination
               rowsPerPageOptions={[25, 50, 100]}
               colSpan={3}
-              count={data.elements.length}
+              count={data.length + 100000}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
@@ -192,6 +228,6 @@ export default function CustomPaginationActionsTable({
           </TableRow>
         </TableFooter>
       </Table>
-    </TableContainer>
+    </TableContainer >
   );
 }
