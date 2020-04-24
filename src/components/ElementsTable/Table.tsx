@@ -147,11 +147,18 @@ export default function CustomPaginationActionsTable({
   }
 
   if (error) {
-    return (<Snackbar open={isErrorShown} autoHideDuration={6000} onClose={handleClose}>
-      <Alert onClose={handleClose} severity="error">
-        Something went wrong: {error}
-      </Alert>
-    </Snackbar>);
+    return (
+      <div>
+        <div>
+          body
+        </div>
+      <Snackbar open={isErrorShown} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          Something went wrong: {error}
+        </Alert>
+      </Snackbar>
+      </div>
+    );
   }
 
   if (loading || !data.length) {
@@ -214,7 +221,7 @@ export default function CustomPaginationActionsTable({
             <TablePagination
               rowsPerPageOptions={[25, 50, 100]}
               colSpan={3}
-              count={data.length + 100000}
+              count={data.length + 100000} // TODO: when i ask for data (items/feeds) return the total amount as well
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
