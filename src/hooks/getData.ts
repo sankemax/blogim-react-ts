@@ -10,7 +10,7 @@ export function useGetData(
   limit: number,
   offset: number,
   config: Config,
-  showErrorFn: (isError: boolean) => void
+  // showErrorFn: (isError: boolean) => void
 ) {
   const [data, setData] = useState<({ [key: string]: string, id: string })[]>([]);
   const [loading, setLoading] = useState(true);
@@ -24,13 +24,13 @@ export function useGetData(
       } catch (err) {
         console.log(err)
         setError(err.message);
-        showErrorFn(true);
+        // showErrorFn(true);
       } finally {
         setLoading(false);
       }
     }
     getData();
-  }, [limit, offset, config, type, showErrorFn,]);
+  }, [limit, offset, config, type, ])//showErrorFn,]);
 
   return { data, error, loading };
 }

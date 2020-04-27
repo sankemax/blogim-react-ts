@@ -30,7 +30,7 @@ export default function Header(/*config: Config*/) {
                     <MenuIcon />
                 </IconButton>
                 <Typography variant="h6" className={classes.title}>
-                    News
+                    כתיבה עצמאית מעניינת בעברית
                 </Typography>
             </Toolbar>
         </AppBar>

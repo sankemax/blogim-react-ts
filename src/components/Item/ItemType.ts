@@ -7,5 +7,6 @@ export interface Item {
     pubdate: string
     comments: string[]
     feedUrl: string
-    date: string
+    faviconUrl: string
+    author: string
 }
