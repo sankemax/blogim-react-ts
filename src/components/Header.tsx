@@ -26,9 +26,10 @@ export default function Header(/*config: Config*/) {
     return (<div className={classes.root}>
         <AppBar position="static">
             <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                     <MenuIcon />
-                </IconButton>
+                </IconButton> */}
+                <img src="http://info.org.il/club/blogim-logo-small.png" alt="glasses illustration"/>
                 <Typography variant="h6" className={classes.title}>
                     כתיבה עצמאית מעניינת בעברית
                 </Typography>

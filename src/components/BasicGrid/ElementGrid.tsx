@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function CenteredGrid({ dataType, config }: GridType) {
   const classes = useStyles();
 
-  const { data, error, loading, } = useGetData(dataType, 10, 0, config)//() => { });
+  const { data, error, loading, } = useGetData(dataType, 50, 0, config)//() => { });
 
   if (error) {
     return (<div>ERROR...</div>);

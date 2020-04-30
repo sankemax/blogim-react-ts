@@ -2,11 +2,13 @@ export interface Item {
     type: 'Item'
     id: number
     title: string
+    blogTitle: string
     link: string
     description: string
     pubdate: string
     comments: string[]
+    categories: string[]
     feedUrl: string
-    faviconUrl: string
+    domain: string
     author: string
 }
