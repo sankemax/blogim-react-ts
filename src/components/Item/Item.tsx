@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 
 import { Item } from './ItemType';
 
+moment.locale('he');
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -53,7 +55,7 @@ export function ItemComponent({
     comments,
 }: Item) {
     const classes = useStyles();
-    const formattedDate = moment(pubdate).format('YYYY-MM-DD HH:mm:ssZ');
+    const formattedDate = moment(pubdate).format('LLLL'); //.format('YYYY-MM-DD HH:mm:ssZ');
     return (
         <Card className={classes.root}>
             <CardHeader
