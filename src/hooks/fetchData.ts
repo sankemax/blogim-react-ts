@@ -4,12 +4,14 @@ import axios from "axios";
 import { Item } from "../components/Item/ItemType";
 import { Feed } from "../components/Feed/FeedType";
 import { Config } from "../config/ConfigType";
+import { OffsetState } from "../reducers/offsetReducer";
+import { DataAction } from "../reducers/dataReducer";
 
 export default function fetchData(
   type: Item["type"] | Feed["type"],
   config: Config,
 ) {
-  return function useFetchData({ limit, offset }: any, dispatch: any) {
+  return function useFetchData({ limit, offset }: OffsetState, dispatch: (offsetAction: DataAction) => void) {
     useEffect(() => {
       const getData = async () => {
         try {

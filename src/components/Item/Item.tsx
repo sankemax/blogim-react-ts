@@ -1,7 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import { makeStyles, createStyles, createMuiTheme, Theme, ThemeProvider, } from '@material-ui/core/styles';
-import grey from '@material-ui/core/colors/grey'
+import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -20,6 +21,9 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         content: {
 
+        },
+        hashtags: {
+            color: blue[500],
         },
         avatar: {
             width: theme.spacing(4),
@@ -72,10 +76,10 @@ export function ItemComponent({
             <Link href={link}>{title}</Link>
             <CardContent className={classes.content}>
                 <ThemeProvider theme={muiTheme}>
-                    <Typography variant="body1" color="primary" component="p">
+                    <Typography variant="body1" color="textPrimary" component="p">
                         {description}
                     </Typography>
-                    <Typography paragraph>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</Typography>
+                    <Typography className={classes.hashtags} paragraph>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</Typography>
                 </ThemeProvider>
             </CardContent>
         </Card>

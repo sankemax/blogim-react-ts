@@ -6,9 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import { GridType } from './types';
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { ItemComponent } from "../Item/Item";
-import { Item } from '../Item/ItemType';
-import { Feed } from '../Feed/FeedType';
 import fetchData from '../../hooks/fetchData';
+import offsetReducer from '../../reducers/offsetReducer';
+import dataReducer from '../../reducers/dataReducer';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 // import { Config } from '../../config/ConfigType';
 // import { FeedComponent } from "../Feed";
 
@@ -22,40 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
+    loader: {
+      alignContent: 'center',
+      height: '100px',
+      width: '100px',
+      margin: 'auto',
+    },
   }),
 );
-
-const dataReducer = (state: any, action: any) => {
-  switch (action.type) {
-    case 'STACK_DATA':
-      return { ...state, data: state.data.concat(action.data) };
-    case 'FETCHING_DATA':
-      return { ...state, fetching: action.fetching };
-    case 'ERROR':
-      return { ...state, error: true };
-    default:
-      return state;
-  }
-}
-
-function offsetReducer(state: any, action: any) {
-  const { limit, offset, } = state;
-  switch (action.type) {
-    case 'SCROLL':
-    default:
-      return {
-        limit,
-        offset: offset + limit + 1,
-      }
-    //   case 'INIT':
-    //   default:
-    //     return {
-    //       limit,
-    //       offset: 0,
-    //     }
-    // }
-  }
-}
 
 export default function CenteredGrid({ dataType, config }: GridType) {
   const classes = useStyles();
@@ -90,13 +66,15 @@ export default function CenteredGrid({ dataType, config }: GridType) {
         }
       </div>
 
-      {blogData.fetching && ( //TODO: material ui loader
-        <div className="text-center bg-secondary m-auto p-3">
-          <p className="m-0 text-white">Getting Blogs</p>
-        </div>
-      )}
+      {blogData.fetching && (<div className={classes.loader}>
+        <CircularProgress
+          disableShrink
+          size={70}
+          variant={'indeterminate'}
+        />
+      </div>)}
 
-      <div ref={bottomBoundaryRef} id="page-bottom-boundary" style={{ border: '1px solid red' }}>
+      <div ref={bottomBoundaryRef} id="page-bottom-boundary" style={{ border: '1px' }}>
       </div>
     </span>
   );
