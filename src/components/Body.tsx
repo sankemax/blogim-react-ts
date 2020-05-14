@@ -19,7 +19,7 @@ export default function Body({ config,}: BodyProps) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <p className="Title">
+            <p className="Description">
                 פוסטים חדשים מבלוגים ישראלים. האתר מתעדכן אוטומטית באופן שוטף.
             </p>
             <ElementGrid dataType="Item" config={config} />

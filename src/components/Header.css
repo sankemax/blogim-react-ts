@@ -1,20 +1,29 @@
 .AppBar {
-    font-family: Alef, sans-serif;
     font-size: 1.2em;
-    text-decoration-color: #1f17bf;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    color: #1f17bf;
+    z-index: 1000;
+
+    background-color: #fafafa;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+
     text-align: center;
-    background-color: white;
-    flex-grow: 1;
     position: sticky;
     top: 0;
-    margin-left: 0;
-    margin-right: 0;
-    z-index: 1000;
     height: 93px;
 }
 
+.Title {
+    display: block;
+    position: absolute;
+    top: 35%;
+    right: 17%;
+    left: 17%;
+    margin: auto;
+}
+
 img {
-    float: right;
+    position: absolute;
+    padding-right: 5%;
+    top: 25%;
+    right: 5%;
 }
