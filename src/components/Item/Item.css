@@ -1,0 +1,28 @@
+.Item {
+    font-family: Alef, sans-serif;
+    text-align: right;
+}
+
+.ItemHeader {
+    font-family: Alef, sans-serif;
+}
+
+.ItemLink {
+    font-weight: bold;
+    color: #1E68A6;
+    text-decoration: none;
+}
+
+.ItemLink:hover, .ItemLink:active {
+    text-decoration: underline;
+}
+
+.CardContent {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: 100%;
+}
+
+.ItemDescription {
+    text-align: right;
+}

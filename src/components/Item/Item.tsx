@@ -1,38 +1,12 @@
 import React from 'react';
 import moment from 'moment';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import grey from '@material-ui/core/colors/grey';
-import blue from '@material-ui/core/colors/blue';
 import Avatar from '@material-ui/core/Avatar';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import Link from '@material-ui/core/Link';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-
 import { Item } from './ItemType';
+import "./Item.css";
 
 moment.locale('he');
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            maxWidth: '100%',
-        },
-        content: {
-
-        },
-        hashtags: {
-            color: blue[500],
-        },
-        avatar: {
-            width: theme.spacing(4),
-            height: theme.spacing(4),
-            backgroundColor: grey[500],
-        },
-
-    }),
-);
 
 export function ItemComponent({
     id,
@@ -47,14 +21,14 @@ export function ItemComponent({
     categories,
     comments,
 }: Item) {
-    const classes = useStyles();
     const formattedDate = moment(pubdate).format('LLLL'); //.format('YYYY-MM-DD HH:mm:ssZ');
     return (
-        <Card className={classes.root}>
+        <Card className="Item">
             <CardHeader
+                className="ItemHeader"
                 avatar={
                     <Avatar
-                        className={classes.avatar}
+                        className="Avatar"
                         alt={`favicon for ${title} post`}
                         src={`https://www.google.com/s2/favicons?sz=32&domain_url=${domain}`}
                     />
@@ -62,15 +36,15 @@ export function ItemComponent({
                 title={`${blogTitle} - ${author}`}
                 subheader={formattedDate}
             />
-            <Link href={link}>{title}</Link>
-            <CardContent className={classes.content}>
-                <Typography variant="body1" color="textPrimary" component="p">
-                    {description}
-                </Typography>
-                <Typography className={classes.hashtags} paragraph>
-                    {categories?.map(category => `#${category}`)?.join(", ") ?? ""}
-                </Typography>
-            </CardContent>
+            <a className="ItemLink" href={link}>{title}</a>
+            <div className="CardContent">
+                <div className="ItemDescription">
+                    <p>{description}</p>
+                </div>
+                <div className="Hashtags">
+                    <p>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</p>
+                </div>
+            </div>
         </Card>
     )
 }
