@@ -1,0 +1,20 @@
+.AppBar {
+    font-family: Alef, sans-serif;
+    font-size: 1.2em;
+    text-decoration-color: #1f17bf;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    background-color: white;
+    flex-grow: 1;
+    position: sticky;
+    top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    z-index: 1000;
+    height: 93px;
+}
+
+img {
+    float: right;
+}

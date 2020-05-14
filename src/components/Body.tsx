@@ -1,27 +1,27 @@
 import React from "react";
-
 import ElementGrid from "./BasicGrid/ElementGrid";
 import { Config } from "../config/ConfigType";
 import { makeStyles, Theme, createStyles } from "@material-ui/core";
-import { HeaderHeightState } from "../reducers/headerHeightReducer";
+import "./Body.css";
 
-const useStyles = (marginTop: number) => makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            marginTop: `${marginTop}px`,
-        }
+        },
     }),
 );
 
 export interface BodyProps {
     config: Config
-    headerHeightState: HeaderHeightState
 }
 
-export default function Body({ config, headerHeightState }: BodyProps) {
-    const classes = useStyles(headerHeightState.height)();
+export default function Body({ config,}: BodyProps) {
+    const classes = useStyles();
     return (
         <div className={classes.root}>
+            <p className="Title">
+                פוסטים חדשים מבלוגים ישראלים. האתר מתעדכן אוטומטית באופן שוטף.
+            </p>
             <ElementGrid dataType="Item" config={config} />
         </div>
     )

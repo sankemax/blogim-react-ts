@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { makeStyles, createStyles, createMuiTheme, Theme, ThemeProvider, } from '@material-ui/core/styles';
+import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
 import Avatar from '@material-ui/core/Avatar';
@@ -34,17 +34,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const muiTheme = createMuiTheme({
-    typography: {
-        fontFamily: [
-            'Alef',
-            'sans-serif',
-            '-apple-system',
-            'BlinkMacSystemFont',
-        ].join(','),
-    },
-});
-
 export function ItemComponent({
     id,
     title,
@@ -75,12 +64,12 @@ export function ItemComponent({
             />
             <Link href={link}>{title}</Link>
             <CardContent className={classes.content}>
-                <ThemeProvider theme={muiTheme}>
-                    <Typography variant="body1" color="textPrimary" component="p">
-                        {description}
-                    </Typography>
-                    <Typography className={classes.hashtags} paragraph>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</Typography>
-                </ThemeProvider>
+                <Typography variant="body1" color="textPrimary" component="p">
+                    {description}
+                </Typography>
+                <Typography className={classes.hashtags} paragraph>
+                    {categories?.map(category => `#${category}`)?.join(", ") ?? ""}
+                </Typography>
             </CardContent>
         </Card>
     )

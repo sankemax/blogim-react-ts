@@ -3,7 +3,7 @@ import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-import { GridType } from './types';
+import { GridType } from './ElementGridType';
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { ItemComponent } from "../Item/Item";
 import fetchData from '../../hooks/fetchData';
