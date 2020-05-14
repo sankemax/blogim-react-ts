@@ -1,5 +1,5 @@
 body {
-  background-color: #fafafa;
+  background-color: whitesmoke;
   margin: 0;
   font-family: Alef, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -7,6 +7,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

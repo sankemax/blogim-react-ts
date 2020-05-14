@@ -1,28 +1,49 @@
 .Item {
     font-family: Alef, sans-serif;
     text-align: right;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .ItemHeader {
-    font-family: Alef, sans-serif;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.ItemDate {
+    color: #777777;
+}
+
+.BlogTitle {
+    margin-left: 10px;
+}
+
+.BlogTitleAndFav {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+
+.ItemFav {
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .ItemLink {
     font-weight: bold;
     color: #1E68A6;
     text-decoration: none;
+    width: fit-content;
 }
 
 .ItemLink:hover, .ItemLink:active {
     text-decoration: underline;
-}
-
-.CardContent {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    max-width: 100%;
-}
-
-.ItemDescription {
-    text-align: right;
 }

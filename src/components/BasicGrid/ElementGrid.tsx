@@ -10,12 +10,19 @@ import fetchData from '../../hooks/fetchData';
 import offsetReducer from '../../reducers/offsetReducer';
 import dataReducer from '../../reducers/dataReducer';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import "./ElementGrid.css";
 // import { Config } from '../../config/ConfigType';
 // import { FeedComponent } from "../Feed";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    paper: {
+      backgroundColor: 'whitesmoke',
+      marginTop: '10px',
+      paddingTop: '16px',
+      paddingRight: '5%',
+      paddingLeft: '5%',
+      color: 'black',
+    },
     loader: {
       alignContent: 'center',
       height: '100px',
@@ -48,12 +55,12 @@ export default function CenteredGrid({ dataType, config }: GridType) {
           !(blogData?.data?.length ?? 0)
             ? null
             : blogData?.data?.map(
-              (element: any, idx: number) => <Grid
-                item key={idx} xs={12}>
-                <Paper className="Paper">
-                  {dataType === 'Item' ? <ItemComponent {...element} /> : null}
-                </Paper>
-              </Grid>
+              (element: any, idx: number) =>
+                <Grid className="ElementGrid" item key={idx} xs={12}>
+                  <Paper className={classes.paper}>
+                    {dataType === 'Item' ? <ItemComponent {...element} /> : null}
+                  </Paper>
+                </Grid>
             )
         }
       </div>

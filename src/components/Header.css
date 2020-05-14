@@ -3,8 +3,8 @@
     color: #1f17bf;
     z-index: 1000;
 
-    background-color: #fafafa;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+    background-color: whitesmoke;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
 
     text-align: center;
     position: sticky;
@@ -21,7 +21,7 @@
     margin: auto;
 }
 
-img {
+.TitleFav {
     position: absolute;
     padding-right: 5%;
     top: 25%;
