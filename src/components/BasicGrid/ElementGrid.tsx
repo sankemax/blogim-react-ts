@@ -55,8 +55,8 @@ export default function CenteredGrid({ dataType, config }: GridType) {
           !(blogData?.data?.length ?? 0)
             ? null
             : blogData?.data?.map(
-              (element: any, idx: number) =>
-                <Grid className="ElementGrid" item key={idx} xs={12}>
+              (element: any) =>
+                <Grid className="ElementGrid" item key={element.id} xs={12}>
                   <Paper className={classes.paper}>
                     {dataType === 'Item' ? <ItemComponent {...element} /> : null}
                   </Paper>
