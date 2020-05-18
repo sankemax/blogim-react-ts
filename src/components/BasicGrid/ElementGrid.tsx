@@ -16,6 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
+      overflowWrap: 'break-word',
       backgroundColor: 'whitesmoke',
       marginTop: '10px',
       paddingTop: '16px',
