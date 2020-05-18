@@ -11,7 +11,7 @@ export default function fetchData(
   type: Item["type"] | Feed["type"],
   config: Config,
 ) {
-  return function useFetchData({ limit, offset }: OffsetState, dispatch: (offsetAction: DataAction) => void) {
+  return function useFetchData<T>({ limit, offset }: OffsetState, dispatch: (offsetAction: DataAction<T>) => void) {
     useEffect(() => {
       const getData = async () => {
         try {

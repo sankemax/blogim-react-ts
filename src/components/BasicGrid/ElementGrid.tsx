@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useRef } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,11 +7,8 @@ import { GridType } from './ElementGridType';
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { ItemComponent } from "../Item/Item";
 import fetchData from '../../hooks/fetchData';
-import offsetReducer from '../../reducers/offsetReducer';
-import dataReducer from '../../reducers/dataReducer';
 import CircularProgress from '@material-ui/core/CircularProgress';
-// import { Config } from '../../config/ConfigType';
-// import { FeedComponent } from "../Feed";
+// import { Feed } from "../Feed";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -33,40 +30,45 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function CenteredGrid({ dataType, config }: GridType) {
+export default function CenteredGrid<T>({
+  dataType,
+  config,
+  hidden,
+  paginationState,
+  paginationDispatcher,
+  dataState,
+  dataDispatcher,
+}: GridType<T>) {
   const classes = useStyles();
   const useFetchData = fetchData(dataType, config);
 
-  const [pagination, paginationDispatch] = useReducer(offsetReducer, { limit: 5, offset: 0 });
-  const [blogData, dataDispatch] = useReducer(dataReducer, { data: [], fetching: true, error: false, });
-
   const bottomBoundaryRef = useRef(null);
 
-  useFetchData(pagination, dataDispatch);
-  useInfiniteScroll(bottomBoundaryRef, paginationDispatch);
+  useFetchData(paginationState, dataDispatcher);
+  useInfiniteScroll(bottomBoundaryRef, paginationDispatcher);
 
-  if (blogData.error) {
+  if (dataState.error) {
     return (<div>ERROR...</div>);
   }
 
   return (
-    <span className="GridRoot">
+    <span className="GridRoot" hidden={hidden}>
       <div>
         {
-          !(blogData?.data?.length ?? 0)
+          !(dataState?.data?.length ?? 0)
             ? null
-            : blogData?.data?.map(
+            : dataState?.data?.map(
               (element: any) =>
                 <Grid className="ElementGrid" item key={element.id} xs={12}>
                   <Paper className={classes.paper}>
-                    {dataType === 'Item' ? <ItemComponent {...element} /> : null}
+                    {dataType === 'Item' ? <ItemComponent {...element} /> : <>FEEDS</>}
                   </Paper>
                 </Grid>
             )
         }
       </div>
 
-      {blogData.fetching && (<div className={classes.loader}>
+      {dataState.fetching && (<div className={classes.loader}>
         <CircularProgress
           disableShrink
           size={70}
