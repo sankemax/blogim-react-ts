@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import { Item } from './ItemType';
+import { ItemType } from './ItemType';
 import "./Item.css";
 
 moment.locale('he');
@@ -17,7 +17,7 @@ export function ItemComponent({
     pubdate,
     categories,
     comments,
-}: Item) {
+}: ItemType) {
     const formattedDate = moment(pubdate).format('DD MMMM YYYY HH:mm');
     return (
         <div className="Item">

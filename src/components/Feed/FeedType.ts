@@ -1,8 +1,8 @@
-export interface Feed {
+export interface FeedType {
     type: 'Feed'
-    id: number
-    title: string
+    id: string
+    blogTitle: string
+    author: string
     linkToWebPage: string
     lastPostDate: string
-    categories: string[]
 }

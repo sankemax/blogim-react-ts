@@ -2,15 +2,18 @@ import React, { useRef, useReducer, Reducer } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
-import { GridType } from './ElementGridType';
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
-import { ItemComponent } from "../Item/Item";
-import fetchData from '../../hooks/fetchData';
 import CircularProgress from '@material-ui/core/CircularProgress';
+
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
+import fetchData from '../../hooks/fetchData';
+
 import offsetReducer from '../../reducers/offsetReducer';
 import dataReducer, { DataState, DataAction } from '../../reducers/dataReducer';
-// import { Feed } from "../Feed";
+
+import { GridType } from './ElementGridType';
+import { ItemComponent } from "../Item/Item";
+import { FeedComponent } from "../Feed/Feed";
+
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -67,7 +70,7 @@ export default function CenteredGrid<T>({
               (element: any) =>
                 <Grid className="ElementGrid" item key={element.id} xs={12}>
                   <Paper className={classes.paper}>
-                    {dataType === 'Item' ? <ItemComponent {...element} /> : <>FEEDS</>}
+                    {dataType === 'Item' ? <ItemComponent {...element} /> : <FeedComponent {...element} />}
                   </Paper>
                 </Grid>
             )

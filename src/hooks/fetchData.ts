@@ -1,14 +1,14 @@
 import { useEffect, } from "react";
 import axios from "axios";
 
-import { Item } from "../components/Item/ItemType";
-import { Feed } from "../components/Feed/FeedType";
+import { ItemType } from "../components/Item/ItemType";
+import { FeedType } from "../components/Feed/FeedType";
 import { Config } from "../config/ConfigType";
 import { OffsetState } from "../reducers/offsetReducer";
 import { DataAction } from "../reducers/dataReducer";
 
 export default function fetchData(
-  type: Item["type"] | Feed["type"],
+  type: ItemType["type"] | FeedType["type"],
   config: Config,
 ) {
   return function useFetchData<T>({ limit, offset }: OffsetState, dispatch: (offsetAction: DataAction<T>) => void) {

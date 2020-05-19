@@ -10,20 +10,18 @@
     position: sticky;
     top: 0;
     height: 93px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .Title {
-    display: block;
-    position: absolute;
-    top: 35%;
-    right: 17%;
-    left: 17%;
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .TitleFav {
-    position: absolute;
-    padding-right: 5%;
-    top: 25%;
-    right: 5%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
