@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useReducer, Reducer } from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +8,8 @@ import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import { ItemComponent } from "../Item/Item";
 import fetchData from '../../hooks/fetchData';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import offsetReducer from '../../reducers/offsetReducer';
+import dataReducer, { DataState, DataAction } from '../../reducers/dataReducer';
 // import { Feed } from "../Feed";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,18 +36,22 @@ export default function CenteredGrid<T>({
   dataType,
   config,
   hidden,
-  paginationState,
-  paginationDispatcher,
-  dataState,
-  dataDispatcher,
+  paginationSize,
 }: GridType<T>) {
   const classes = useStyles();
-  const useFetchData = fetchData(dataType, config);
 
   const bottomBoundaryRef = useRef(null);
 
-  useFetchData(paginationState, dataDispatcher);
-  useInfiniteScroll(bottomBoundaryRef, paginationDispatcher);
+  const [paginationState, paginationDispatch] = useReducer(offsetReducer, { limit: paginationSize, offset: 0 });
+  const [dataState, dataDispatch] = useReducer<Reducer<DataState<T>, DataAction<T>>>(
+    dataReducer,
+    { data: [], fetching: true, error: false, }
+  );
+
+  const useFetchData = fetchData(dataType, config);
+
+  useFetchData(paginationState, dataDispatch);
+  useInfiniteScroll(bottomBoundaryRef, paginationDispatch);
 
   if (dataState.error) {
     return (<div>ERROR...</div>);
