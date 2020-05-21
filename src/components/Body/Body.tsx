@@ -15,7 +15,7 @@ export default function Body({ config, }: BodyProps) {
 
     return (
         <>
-            <p className="Description">
+            <p className="Description" onClick={() => window.location.href = '/'}>
                 פוסטים חדשים מבלוגים ישראלים. האתר מתעדכן אוטומטית באופן שוטף.
             </p>
             <AppTabs tabState={tabState} dispatcher={dispatchTabState} />

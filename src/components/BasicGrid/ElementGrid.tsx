@@ -12,7 +12,7 @@ import dataReducer, { DataState, DataAction } from '../../reducers/dataReducer';
 
 import { GridType } from './ElementGridType';
 import { ItemComponent } from "../Item/Item";
-import { FeedComponent } from "../Feed/Feed";
+import FeedGrid from '../Feed/FeedGrid';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -62,20 +62,22 @@ export default function CenteredGrid<T>({
 
   return (
     <span className="GridRoot" hidden={hidden}>
-      <div>
-        {
-          !(dataState?.data?.length ?? 0)
-            ? null
-            : dataState?.data?.map(
+      {
+        !(dataState?.data?.length ?? 0)
+          ? null
+          : dataType === 'Item'
+            ? dataState?.data?.map(
               (element: any) =>
                 <Grid className="ElementGrid" item key={element.id} xs={12}>
                   <Paper className={classes.paper}>
-                    {dataType === 'Item' ? <ItemComponent {...element} /> : <FeedComponent {...element} />}
+                    <ItemComponent {...element} />
                   </Paper>
                 </Grid>
             )
-        }
-      </div>
+            : <Paper className={classes.paper}>
+              <FeedGrid>{dataState?.data}</FeedGrid>
+            </Paper>
+      }
 
       {dataState.fetching && (<div className={classes.loader}>
         <CircularProgress
@@ -85,7 +87,7 @@ export default function CenteredGrid<T>({
         />
       </div>)}
 
-      <div ref={bottomBoundaryRef} id="page-bottom-boundary" style={{ border: '1px' }}>
+      <div ref={bottomBoundaryRef} id="page-bottom-boundary" style={{ border: '1px', marginBottom: '20px' }}>
       </div>
     </span>
   );

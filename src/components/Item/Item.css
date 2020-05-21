@@ -37,6 +37,20 @@
     margin-bottom: auto;
 }
 
+.FeedDiv {
+    margin-left: 5px;
+}
+
+.FeedLink {
+    color: #1E68A6;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.FeedLink:hover, .FeedLink:active {
+    text-decoration: underline;
+}
+
 .ItemLink {
     font-weight: bold;
     color: #1E68A6;

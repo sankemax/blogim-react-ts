@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.AppBar:hover {
+    cursor: pointer;
+}
+
 .Title {
     margin-top: auto;
     margin-bottom: auto;
