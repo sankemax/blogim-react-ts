@@ -1,0 +1,9 @@
+.FeedLink {
+    color: #1E68A6;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.FeedLink:hover, .FeedLink:active {
+    text-decoration: underline;
+}
