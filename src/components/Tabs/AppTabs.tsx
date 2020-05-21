@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, Theme, withStyles, createStyles, } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -15,9 +15,38 @@ function a11yProps(index: any) {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
+    boxShadow: 'none',
+    color: '#1E68A6',
+    backgroundColor: 'whitesmoke',
   },
 }));
+
+const AntTab = withStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      textTransform: 'none',
+      minWidth: 72,
+      fontWeight: 'bold',
+      marginRight: theme.spacing(4),
+      fontFamily: ['Alef', 'sans-serif',].join(','),
+      '&:hover': {
+        color: '#1E68A6',
+        opacity: 1,
+      },
+      '&$selected': {
+        color: '#1E68A6',
+      },
+      '&:focus': {
+        color: '#1E68A6',
+      },
+    },
+    selected: {},
+  }),
+)((props: StyledTabProps) => <Tab disableRipple {...props} />);
+
+interface StyledTabProps {
+  label: string;
+}
 
 export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, dispatcher: Dispatch<TabAction> }) {
   const classes = useStyles();
@@ -27,14 +56,17 @@ export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, 
   };
 
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={tabState.tabSelected} onChange={handleChange} aria-label="tabs">
-          <Tab label="פוסטים" {...a11yProps(0)} />
-          <Tab label="בלוגים" {...a11yProps(1)} />
-          <Tab label="אודות" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-    </div>
+    <AppBar position="static" className={classes.root}>
+      <Tabs
+        value={tabState.tabSelected}
+        indicatorColor="primary"
+        onChange={handleChange}
+        aria-label="tabs"
+      >
+        <AntTab label="פוסטים" {...a11yProps(0)} />
+        <AntTab label="בלוגים" {...a11yProps(1)} />
+        <AntTab label="אודות" {...a11yProps(2)} />
+      </Tabs>
+    </AppBar>
   );
 }
