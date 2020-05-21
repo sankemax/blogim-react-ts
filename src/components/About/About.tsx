@@ -39,7 +39,7 @@ export default function About({ hidden }: AboutProps) {
                 <p>מפעיל האתר "לא רלוונטי" לבדיקת שמועות אינטרנט ומכתבי שרשרת.</p>
                 <p>אימייל <a href="mailto:hanan@info.org.il">hanan@info.org.il</a>, טוויטר <a
                     href="https://twitter.com/hananc">@hananc</a> , פייסבוק? כבר לא שם.</p>
-                <p>יוצר האתר הוא <a href="https://www.linkedin.com/in/maxim-golman-9892466b/">מקסים גולמן</a>.</p>
+                <p>בניית האתר - <a href="https://www.linkedin.com/in/maxim-golman-9892466b/">מקסים גולמן</a>.</p>
                 <p>
                     קוד המקור נמצא בגיטהאב ואתם מוזמנים לתרום להמשך פיתוחו של האתר:
                     &nbsp;<a href="https://github.com/sankemax/blogim-react-ts">Frontend</a> and <a href="https://github.com/sankemax/rss-item-recorder">Backend</a>.
