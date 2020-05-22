@@ -5,5 +5,4 @@ export interface FeedType {
     author: string
     linkToWebPage: string
     lastPostDate: string
-    numberOfItems: number
 }
