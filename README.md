@@ -1,3 +1,8 @@
+# Blogim.info
+It's a web-app I wrote in collaboration with [Hanan Cohen](https://twitter.com/hananc) who requested me to re-create the site after the previous iteration - Blogim.info - was struggling to survive.
+
+The backend is located in a [separate project](https://github.com/sankemax/rss-item-recorder).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
