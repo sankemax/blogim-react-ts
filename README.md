@@ -4,6 +4,8 @@ It's a web-app I wrote in collaboration with [Hanan Cohen](https://twitter.com/h
 You can check out the site [here](http://www.blogim.club).
 The backend is located in a [separate project](https://github.com/sankemax/rss-item-recorder).
 
+Latest *experimental* deployment is always found [here](https://blogim-web.herokuapp.com/).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
