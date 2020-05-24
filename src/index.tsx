@@ -8,7 +8,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Config } from './config/ConfigType';
 
-Sentry.init({dsn: "https://220f97dde64a40549c633c4f0c7fa834@o388622.ingest.sentry.io/5250333"});
+Sentry.init({dsn: process.env.SENTRY_SECRET});
 
 const config: Config = {
   rssServiceBaseUrl: process.env.REACT_APP_RSS_READER_API!
