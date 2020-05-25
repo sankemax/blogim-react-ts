@@ -25,7 +25,7 @@ export function FeedComponent({
     <Grid container spacing={spacing}>
       <Grid className={classes.grid} item xs={6}>
         <img className="FeedFav" alt={`favicon for blog`} src={`https://www.google.com/s2/favicons?sz=16&domain_url=${linkToWebPage}`} />
-        <a className="FeedLink" href={linkToWebPage}>{blogTitle}</a>
+        <a className="FeedLink" href={linkToWebPage}>{blogTitle || 'ללא כותרת'}</a>
       </Grid>
       <Grid className={classes.grid} item xs={6}>
         {formattedDate}
