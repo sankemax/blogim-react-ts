@@ -24,17 +24,27 @@ export default function Body({ config, }: BodyProps) {
                 hidden={tabState.tabSelected !== 0}
                 dataType="Item"
                 config={config}
-                paginationSize={5}
+                fetchSize={5}
+                isPaginated={true}
             />
 
             <ElementGrid
                 hidden={tabState.tabSelected !== 1}
                 dataType="Feed"
                 config={config}
-                paginationSize={20}
+                fetchSize={20}
+                isPaginated={true}
             />
 
-            <About hidden={tabState.tabSelected !== 2} />
+            <ElementGrid
+                hidden={tabState.tabSelected !== 2}
+                dataType="Update"
+                config={config}
+                fetchSize={20}
+                isPaginated={false}
+            />
+
+            <About hidden={tabState.tabSelected !== 3} />
         </>
     )
 }

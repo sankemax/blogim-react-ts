@@ -65,7 +65,8 @@ export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, 
       >
         <AntTab label="פוסטים" {...a11yProps(0)} />
         <AntTab label="בלוגים" {...a11yProps(1)} />
-        <AntTab label="אודות" {...a11yProps(2)} />
+        <AntTab label="עדכונים" {...a11yProps(2)} />
+        <AntTab label="אודות" {...a11yProps(3)} />
       </Tabs>
     </AppBar>
   );

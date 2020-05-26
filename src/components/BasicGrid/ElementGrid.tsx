@@ -39,13 +39,14 @@ export default function CenteredGrid<T>({
   dataType,
   config,
   hidden,
-  paginationSize,
-}: GridType<T>) {
+  fetchSize,
+  isPaginated,
+}: GridType) {
   const classes = useStyles();
 
   const bottomBoundaryRef = useRef(null);
 
-  const [paginationState, paginationDispatch] = useReducer(offsetReducer, { limit: paginationSize, offset: 0 });
+  const [paginationState, paginationDispatch] = useReducer(offsetReducer, { limit: fetchSize, offset: 0 });
   const [dataState, dataDispatch] = useReducer<Reducer<DataState<T>, DataAction<T>>>(
     dataReducer,
     { data: [], fetching: true, error: false, }
@@ -54,7 +55,8 @@ export default function CenteredGrid<T>({
   const useFetchData = fetchData(dataType, config);
 
   useFetchData(paginationState, dataDispatch);
-  useInfiniteScroll(bottomBoundaryRef, paginationDispatch);
+
+  useInfiniteScroll(bottomBoundaryRef, paginationDispatch, isPaginated);
 
   if (dataState.error) {
     return (<div>ERROR...</div>);
@@ -65,7 +67,7 @@ export default function CenteredGrid<T>({
       {
         !(dataState?.data?.length ?? 0)
           ? null
-          : dataType === 'Item'
+          : dataType === 'Item' || dataType === 'Update'
             ? dataState?.data?.map(
               (element: any) =>
                 <Grid className="ElementGrid" item key={element.id} xs={12}>

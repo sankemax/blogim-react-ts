@@ -1,5 +1,5 @@
 export interface ItemType {
-    type: 'Item'
+    type: 'Item' | 'Update'
     id: number
     title: string
     blogTitle: string

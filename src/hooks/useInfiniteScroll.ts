@@ -1,6 +1,9 @@
 import { useCallback, useEffect } from "react";
 
-export default (scrollRef: any, dispatch: any) => {
+export default (scrollRef: any, dispatch: any, isPaginated: boolean) => {
+    if (!isPaginated) {
+        return;
+    }
     const scrollObserver = useCallback(
         node => {
             new IntersectionObserver(entries => {
@@ -17,5 +20,5 @@ export default (scrollRef: any, dispatch: any) => {
         if (scrollRef.current) {
             scrollObserver(scrollRef.current);
         }
-    }, [scrollObserver, scrollRef]);
+    }, [scrollObserver, scrollRef, isPaginated]);
 }

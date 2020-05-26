@@ -32,7 +32,7 @@ export function ItemComponent({
             <a className="ItemLink" href={link}>{title}</a>
             <div className="CardContent">
                 <div className="ItemDescription">
-                    <p>{description}</p>
+                    <p>{description.replace(/<\/?[^>]+(>|$)/g, '')}</p>
                 </div>
                 <div className="Hashtags">
                     <p>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</p>

@@ -1,9 +1,9 @@
 import { Config } from "../../config/ConfigType";
-import { OffsetState } from "../../reducers/offsetReducer";
 
-export interface GridType<T> {
+export interface GridType {
     config: Config
     hidden: boolean
-    dataType: 'Item' | 'Feed'
-    paginationSize: number
+    dataType: 'Item' | 'Update' | 'Feed'
+    fetchSize: number
+    isPaginated: boolean
 }
