@@ -35,7 +35,7 @@ export function ItemComponent({
                     <p>{description.replace(/<\/?[^>]+(>|$)/g, '')}</p>
                 </div>
                 <div className="Hashtags">
-                    <p>{categories?.map(category => `#${category}`)?.join(", ") ?? ""}</p>
+                    <p>{categories?.map(category => `#${category}`)?.join(" ") ?? ""}</p>
                 </div>
             </div>
         </div>

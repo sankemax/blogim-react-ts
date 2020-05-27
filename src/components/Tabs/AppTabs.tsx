@@ -1,19 +1,19 @@
-import React, { Dispatch } from 'react';
+import React, { Dispatch, ChangeEvent, } from 'react';
 import { makeStyles, Theme, withStyles, createStyles, } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
+import Tabs, { TabsProps } from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { TabState, TabAction } from '../../reducers/tabsReducer';
 
 function a11yProps(index: any) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
   };
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
+  appBar: {
     flexGrow: 1,
     boxShadow: 'none',
     color: '#1E68A6',
@@ -33,14 +33,13 @@ const AntTab = withStyles((theme: Theme) =>
         color: '#1E68A6',
         opacity: 1,
       },
-      '&$selected': {
+      '&:selected': {
         color: '#1E68A6',
       },
       '&:focus': {
         color: '#1E68A6',
       },
     },
-    selected: {},
   }),
 )((props: StyledTabProps) => <Tab disableRipple {...props} />);
 
@@ -48,26 +47,39 @@ interface StyledTabProps {
   label: string;
 }
 
+const StyledTabs = withStyles(theme => ({
+  indicator: {
+    [theme.breakpoints.up('xs')]: {
+      display: "flex",
+    },
+    [theme.breakpoints.down('xs')]: {
+      display: "none",
+    }
+  }
+}))((props: TabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
+
 export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, dispatcher: Dispatch<TabAction> }) {
   const classes = useStyles();
 
-  const handleChange = (_: React.ChangeEvent<{}>, newValue: number) => {
-    dispatcher({ type: 'SWITCH_TAB', moveTo: newValue });
+  const handleChange = (event: ChangeEvent<{}>, value: number) => {
+    dispatcher({ type: 'SWITCH_TAB', moveTo: value });
   };
 
   return (
-    <AppBar position="static" className={classes.root}>
-      <Tabs
+    <AppBar position="static" className={classes.appBar}>
+      <StyledTabs
         value={tabState.tabSelected}
+        onChange={handleChange as any}
         indicatorColor="primary"
-        onChange={handleChange}
-        aria-label="tabs"
+        aria-label="blog tabs"
+        variant="scrollable"
+        scrollButtons="on"
       >
         <AntTab label="פוסטים" {...a11yProps(0)} />
         <AntTab label="בלוגים" {...a11yProps(1)} />
         <AntTab label="עדכונים" {...a11yProps(2)} />
         <AntTab label="אודות" {...a11yProps(3)} />
-      </Tabs>
+      </StyledTabs>
     </AppBar>
   );
 }
