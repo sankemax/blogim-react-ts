@@ -1,4 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState, useEffect } from "react";
+import axios from "axios";
+
 import ElementGrid from "../BasicGrid/ElementGrid";
 import { Config } from "../../config/ConfigType";
 import AppTabs from '../Tabs/AppTabs';
@@ -12,11 +14,20 @@ export interface BodyProps {
 
 export default function Body({ config, }: BodyProps) {
     const [tabState, dispatchTabState] = useReducer(tabsSelectionReducer, { tabSelected: 0 });
+    const [infoState, setInfoState] = useState({ numOfBlogs: 0 });
+
+    useEffect(() => {
+        async function getMetadata() {
+            const response = await axios.get(`${config.rssServiceBaseUrl}/metadata`);
+            setInfoState({ numOfBlogs: response.data.metadata.feedCount });
+        }
+        getMetadata()
+    }, [config]);
 
     return (
         <>
             <p className="Description" onClick={() => window.location.href = '/'}>
-                פוסטים חדשים מבלוגים ישראלים. האתר מתעדכן אוטומטית באופן שוטף.
+                פוסטים חדשים מבלוגים ישראלים. האתר מתעדכן מ-{infoState.numOfBlogs} בלוגים אוטומטית באופן שוטף.
             </p>
             <AppTabs tabState={tabState} dispatcher={dispatchTabState} />
 
