@@ -1,7 +1,7 @@
 import React, { Dispatch, ChangeEvent, } from 'react';
 import { makeStyles, Theme, withStyles, createStyles, } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
-import Tabs, { TabsProps } from '@material-ui/core/Tabs';
+import Tabs /*, { TabsProps }*/ from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { TabState, TabAction } from '../../reducers/tabsReducer';
 
@@ -47,16 +47,16 @@ interface StyledTabProps {
   label: string;
 }
 
-const StyledTabs = withStyles(theme => ({
-  indicator: {
-    [theme.breakpoints.up('xs')]: {
-      display: "flex",
-    },
-    [theme.breakpoints.down('xs')]: {
-      display: "none",
-    }
-  }
-}))((props: TabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
+// const StyledTabs = withStyles(theme => ({
+//   indicator: {
+//     [theme.breakpoints.up('xs')]: {
+//       display: "flex",
+//     },
+//     [theme.breakpoints.down('xs')]: {
+//       display: "none",
+//     }
+//   }
+// }))((props: TabsProps) => <Tabs {...props} TabIndicatorProps={{ children: <div /> }} />);
 
 export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, dispatcher: Dispatch<TabAction> }) {
   const classes = useStyles();
@@ -67,19 +67,19 @@ export default function AppTabs({ tabState, dispatcher }: { tabState: TabState, 
 
   return (
     <AppBar position="static" className={classes.appBar}>
-      <StyledTabs
+      <Tabs
         value={tabState.tabSelected}
         onChange={handleChange as any}
         indicatorColor="primary"
         aria-label="blog tabs"
-        variant="scrollable"
-        scrollButtons="on"
+        // variant="scrollable"
+        // scrollButtons="on"
       >
         <AntTab label="פוסטים" {...a11yProps(0)} />
         <AntTab label="בלוגים" {...a11yProps(1)} />
-        <AntTab label="עדכונים" {...a11yProps(2)} />
-        <AntTab label="אודות" {...a11yProps(3)} />
-      </StyledTabs>
+        {/* <AntTab label="עדכונים" {...a11yProps(2)} /> */}
+        <AntTab label="אודות" {...a11yProps(2)} />
+      </Tabs>
     </AppBar>
   );
 }

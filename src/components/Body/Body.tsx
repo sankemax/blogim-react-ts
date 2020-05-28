@@ -47,15 +47,15 @@ export default function Body({ config, }: BodyProps) {
                 isPaginated={true}
             />
 
-            <ElementGrid
+            {/* <ElementGrid
                 hidden={tabState.tabSelected !== 2}
                 dataType="Update"
                 config={config}
                 fetchSize={20}
                 isPaginated={false}
-            />
+            /> */}
 
-            <About hidden={tabState.tabSelected !== 3} />
+            <About hidden={tabState.tabSelected !== 2} />
         </>
     )
 }
