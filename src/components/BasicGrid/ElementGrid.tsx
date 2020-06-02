@@ -68,14 +68,16 @@ export default function CenteredGrid<T>({
         !(dataState?.data?.length ?? 0)
           ? null
           : dataType === 'Item' || dataType === 'Update'
-            ? dataState?.data?.map(
-              (element: any) =>
+            ? dataState
+              ?.data
+              ?.filter((element: any) => element.title || element.description)
+              ?.map((element: any) =>
                 <Grid className="ElementGrid" item key={element.id} xs={12}>
                   <Paper className={classes.paper}>
                     <ItemComponent {...element} />
                   </Paper>
                 </Grid>
-            )
+              )
             : <Paper className={classes.paper}>
               <FeedGrid>{dataState?.data}</FeedGrid>
             </Paper>
