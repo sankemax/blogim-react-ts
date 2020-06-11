@@ -19,17 +19,18 @@ export function ItemComponent({
     comments,
 }: ItemType) {
     const formattedDate = moment(pubdate).format('DD MMMM YYYY HH:mm');
+    const utm = `${link.includes('?') ? '&' : '?'}utm_source=blogim.info&utm_medium=referral`;
     return (
         <div className="Item">
             <div className="ItemHeader">
                 <div className="ItemDate">{formattedDate}</div>
                 <div className="BlogTitleAndFav">
-                    <div className="BlogTitle">{blogTitle}</div>
+                    <a className="BlogTitle" href={`https://${domain}${utm}`}>{blogTitle}</a>
                     <div className="FeedDiv">(<a className="FeedLink" href={feedUrl}>Feed</a>)</div>
                     <img className="ItemFav" alt={`favicon for ${title} post`} src={`https://www.google.com/s2/favicons?sz=16&domain_url=${domain}`} />
                 </div>
             </div>
-            <a className="ItemLink" href={link}>{title}</a>
+            <a className="ItemLink" href={`${link}${utm}`}>{title}</a>
             <div className="CardContent">
                 <div className="ItemDescription">
                     <p>{description?.replace(/<\/?[^>]+(>|$)/g, '') ?? ''}</p>

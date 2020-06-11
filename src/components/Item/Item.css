@@ -21,6 +21,12 @@
 
 .BlogTitle {
     margin-left: 10px;
+    text-decoration: none;
+    color: #1E68A6;
+}
+
+.BlogTitle:hover, .FeedLink:active {
+    text-decoration: underline;
 }
 
 .BlogTitleAndFav {
